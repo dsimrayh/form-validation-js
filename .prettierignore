@@ -1,0 +1,11 @@
+.vscode/
+node_modules/
+.eslintrc.json
+.gitignore
+.prettierrc.json
+index.html
+notes.txt
+package-lock.json
+package.json
+README.md 
+style.css
