@@ -14,6 +14,7 @@
       <p>
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required />
+        <span class="error">Error: input must be a valid email address</span>
       </p>
       <p>
         <label for="country">Country</label>
@@ -308,18 +309,22 @@
           <option value="Zambia">Zambia</option>
           <option value="Zimbabwe">Zimbabwe</option>
         </datalist>
+        <span class="error">Error</span>
       </p>
       <p>
         <label for="ZIP">ZIP Code</label>
         <input type="text" id="ZIP" name="ZIP" required />
+        <span class="error">Error</span>
       </p>
       <p>
         <label for="password">Password</label>
         <input type="text" id="password" name="password" required />
+        <span class="error">Error</span>
       </p>
       <p>
         <label for="confirm">Confirm Password</label>
         <input type="text" id="confirm" name="confirm" required />
+        <span class="error">Error</span>
       </p>
       <button type="submit">Submit</button>
     </form>
