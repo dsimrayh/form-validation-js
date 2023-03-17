@@ -1,37 +1,64 @@
 const submit = document.querySelector('button[type="submit"');
-const inputs = document.querySelectorAll('input');
 
 submit.addEventListener('click', (e) => {
   e.preventDefault();
-  console.log('form submit');
+  console.log('form submitted');
+  document.querySelectorAll('input').forEach((input) => {
+    console.log({
+      name: input.id,
+      valid: input.validity.valid,
+    });
+  });
 });
 
-inputs.forEach((input) => {
-  console.log({ input: input.name, validity: input.validity });
-});
+// Validation functions
 
-// Individual listeners
-const email = document.querySelector('#email');
-email.addEventListener('input', () => {
-  console.log('email updated');
-});
+function checkEmail(e) {
+  const email = e.target;
+  email.className = 'value-entered';
+  if (email.value === '') email.className = '';
 
-const country = document.querySelector('#country');
-country.addEventListener('input', () => {
-  console.log('country updated');
-});
+  const emailRegEx =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-const ZIP = document.querySelector('#ZIP');
-ZIP.addEventListener('input', () => {
+  if (emailRegEx.test(email.value)) {
+    email.setCustomValidity('');
+  } else {
+    email.setCustomValidity('Input must be a valid email address');
+  }
+}
+
+function checkCountry(e) {
+  const country = e.target;
+  country.className = 'value-entered';
+  if (country.value === '') country.className = '';
+
+  const countries = ['united states', 'canada', 'united kingdom'];
+
+  if (countries.includes(country.value.toLowerCase())) {
+    country.setCustomValidity('');
+  } else {
+    country.setCustomValidity(
+      'Country must be United States, Canada, or United Kingdom.'
+    );
+  }
+}
+
+function checkZIP() {
   console.log('ZIP updated');
-});
+}
 
-const password = document.querySelector('#password');
-password.addEventListener('input', () => {
+function checkPassword() {
   console.log('password updated');
-});
+}
 
-const confirm = document.querySelector('#confirm');
-confirm.addEventListener('input', () => {
+function checkConfirm() {
   console.log('confirm updated');
-});
+}
+
+// Individual event listeners
+document.querySelector('#email').oninput = checkEmail;
+document.querySelector('#country').oninput = checkCountry;
+document.querySelector('#ZIP').oninput = checkZIP;
+document.querySelector('#password').oninput = checkPassword;
+document.querySelector('#confirm').oninput = checkConfirm;

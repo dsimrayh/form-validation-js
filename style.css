@@ -58,7 +58,7 @@ p > label {
   font-family: 'Varela Round', sans-serif;
 }
 
-input {
+input{
   width: 100%;
   padding: 8px 0 8px 10px;
   border: 2px solid #555;
@@ -71,6 +71,10 @@ input {
 input:focus {
   border: 2px solid var(--secondary-green);
   outline: transparent;
+}
+
+input.value-entered:invalid {
+  border: 2px solid red;
 }
 
 button[type="submit"] {
@@ -94,8 +98,9 @@ button[type="submit"]:hover {
   display: block;
   padding: 2px 5px;
   border-radius: 5px;
+  font-size: 0.8rem;
   font-family: 'Varela Round', sans-serif;
-  background-color: rgb(250, 150, 150);
+  background-color: rgb(255, 190, 190);
   color: red;
   visibility: hidden;
 }
