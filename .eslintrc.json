@@ -14,6 +14,13 @@
         "error", 
         "single", 
         { "allowTemplateLiterals": true }
-    ]
+    ],
+    "quote-props" : [
+      "error",
+      "consistent"
+    ],
+    "no-use-before-define": ["error", {
+      "functions": false
+    }]
   }
 }
