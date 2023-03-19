@@ -31,13 +31,29 @@
         <span class="error">Error</span>
       </p>
       <p>
-        <label for="password">Password*</label>
-        <input type="text" id="password" name="password" required />
+        <label for="password"
+          >Password*
+          <button
+            type="button"
+            class="show-password"
+            data-field="password"
+            title="Show / Hide Password"
+          ></button
+        ></label>
+        <input type="password" id="password" name="password" required />
         <span class="error">Error</span>
       </p>
       <p>
-        <label for="confirm">Confirm Password*</label>
-        <input type="text" id="confirm" name="confirm" required />
+        <label for="confirm"
+          >Confirm Password*
+          <button
+            type="button"
+            class="show-password"
+            data-field="confirm"
+            title="Show / Hide Password"
+          ></button
+        ></label>
+        <input type="password" id="confirm" name="confirm" required />
         <span class="error">Error</span>
       </p>
       <button type="submit">Submit</button>

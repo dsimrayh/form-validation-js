@@ -1,14 +1,47 @@
+// Event listener for submit button
+// Performs final validation check and dispalys errors
 const submit = document.querySelector('button[type="submit"');
 
 submit.addEventListener('click', (e) => {
-  e.preventDefault();
-  console.log('form submitted');
-  document.querySelectorAll('input').forEach((input) => {
-    console.log({
-      name: input.id,
-      valid: input.validity.valid,
-      message: input.validationMessage,
+  const inputs = document.querySelectorAll('input');
+  let allInputsAreValid = true;
+
+  // Loops through each input. If the input is invalid, the form is prevented from submitting
+  // The error for that input is made visible, the error message is displayed, and allInputsareValid becomes false
+  inputs.forEach((input) => {
+    if (input.validity.valid === false) {
+      e.preventDefault();
+      const error = document.querySelector(`#${input.id} ~ span`);
+      error.classList.add('visible');
+      error.textContent = `Error: ${input.validationMessage}`;
+      allInputsAreValid = false;
+    }
+  });
+
+  // If allInputsAreValid is still true after looping through each one, the form can be 'submitted'
+  // This will also remove the 'value-entered' class from each input and remove the errors
+  if (allInputsAreValid) {
+    e.preventDefault();
+    inputs.forEach((input) => {
+      input.value = '';
+      input.className = '';
     });
+    document.querySelectorAll('.error').forEach((error) => {
+      error.classList = 'error';
+      error.textContent = 'Error';
+    });
+  }
+});
+
+// Event listener for show password buttons
+// Allows user to show / hide their password input
+const showPasswordButtons = document.querySelectorAll('.show-password');
+
+showPasswordButtons.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    const inputField = document.querySelector(`#${e.target.dataset.field}`);
+    if (inputField.type === 'text') inputField.type = 'password';
+    else if (inputField.type === 'password') inputField.type = 'text';
   });
 });
 
@@ -115,12 +148,14 @@ function checkPassword(e) {
 
   if (passwordRegEx.test(password.value)) {
     password.setCustomValidity('');
+    checkConfirm({ target: document.querySelector('#confirm') });
   } else if (password.value === '') {
     password.setCustomValidity('Please fill out this field.');
   } else {
     password.setCustomValidity(
       'Password must be at least 8 characters and must include 1 lowercase letter, 1 uppercase letter, 1 number, and 1 special character.'
     );
+    checkConfirm({ target: document.querySelector('#confirm') });
   }
 }
 
@@ -139,7 +174,7 @@ function checkConfirm(e) {
   }
 }
 
-// Individual event listeners
+// Individual event listeners for each input field
 document.querySelector('#email').oninput = checkEmail;
 document.querySelector('#country').oninput = checkCountry;
 document.querySelector('#ZIP').oninput = checkZIP;
